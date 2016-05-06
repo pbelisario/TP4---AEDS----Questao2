@@ -18,7 +18,7 @@ void EscreveNoArquivo (FILE *, nodo *);
 
 // Dado um arquivo, retorna o vetor palavra (passado como argumento)
 // preenchido com a primeira palavra encontrada e sua linha correspondente
-char LerPalavra(FILE *, char palavra[]);
+nodo *LerPalavra(FILE *, char palavra[]);
 
 //Dado um numero retorna em uma string esse numero na base desejada
 //o termo i corresponde a partir de qual posição da string que se escreverá o numero desejado

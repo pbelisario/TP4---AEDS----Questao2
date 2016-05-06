@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+
 #include "arquivo.h"
 #include "lista.h"
 
@@ -37,11 +38,10 @@ FILE *GeraArquivoSaida (){
 //}
 
 
-char LerPalavra(FILE *arq, char palavra[]){
+nodo *LerPalavra(FILE *arq, char palavra[]){
   //VARIAVEIS DE CONTROLE
   // Determina a Linha atual
   static int linha = 1;
-  char linhaS[10]; //Caso o numero de linhas seja maior do que 10 essa string conterá o numero se ele possuir menos do que 10 posições
   // Diz se já se pode terminar a palavra
   int EFimDePalavra = 0;
   // Indice do vetor palavra recebido como argumente
@@ -61,7 +61,7 @@ char LerPalavra(FILE *arq, char palavra[]){
     }else{
       // Caso ja tenha colocado ao menos uma letra no vetor palavra,
       if (EFimDePalavra){
-        palavra[index] = ' ';
+        palavra[index] = '\0';
       }
       //Caso o caracter encontrado seja um <ENTER> passará de linha
       if (letra == '\n'){
@@ -72,9 +72,13 @@ char LerPalavra(FILE *arq, char palavra[]){
       // dessa forma palavras que terminassem a linhas, não mais seriam
       // consideradas como da linha seguinte
       if(EFimDePalavra){
-        return palavra;
+        nodo *n;
+        n = iniciaNodo();
+        preencheNodo(n, palavra, linha);
+        return n;
       }
     }
     letra = fgetc (arq);
   }
+  return NULL;
 }
