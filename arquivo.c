@@ -5,33 +5,36 @@
 
 
 FILE *AbrirArquivoEntrada (){
-  FILE *arqEntrada = fopen ("nome.txt", "r");
+  FILE *arqEntrada = fopen ("arqEntrada.txt", "r");
   if (arqEntrada == NULL){
-    printf("%s\n", "Falha ao abrir o arquivo");
+    printf("Falha ao abrir o arquivo\n");
     //Termina o programa se não houver arquivo
     exit(1);
   }
   else {
-    printf("%s\n", "Arquivo aberto com sucesso");
+    printf("Arquivo aberto com sucesso\n");
     return arqEntrada;
   }
 }
 
 FILE *GeraArquivoSaida (){
   FILE *arqSaida = fopen ("SAIDA.txt", "w");
+  printf("Arquivo de saida aberto com sucesso.\n");
   return arqSaida;
 }
+
+
 //Recebe um nodo da lista imprime segundo esse padrao já escrito
-void EscreveNoArquivo (FILE *arq, char palavra[], int linha[], int tam){
-  int i = 0;
-  fprintf(arq, "%s\t%d", palavra, linha[i]);
-  i++;
-  while (i < tam){
-    fprintf(arq, ",%d", linha[i]);
-    i++;
-  }
-  fprintf(arq, "\n" );
-}
+//void EscreveNoArquivo (FILE *arq,nodo *n){
+//  int i = 0;
+  //fprintf(arq, "%s\t%d", n->palavra, n->linha[i]);
+//  i++;
+//  while (i < n->tam){
+//    fprintf(arq, ",%d", n->linha[i]);
+//    i++;
+//  }
+//  fprintf(arq, "\n" );
+//}
 
 
 char LerPalavra(FILE *arq, char palavra[]){
@@ -57,10 +60,8 @@ char LerPalavra(FILE *arq, char palavra[]){
         EFimDePalavra = 1;
     }else{
       // Caso ja tenha colocado ao menos uma letra no vetor palavra,
-      // o finaliza, adicionando a linha em que está a tal palavra
       if (EFimDePalavra){
         palavra[index] = ' ';
-        itoa(linha, palavra, 10, (index+1));
       }
       //Caso o caracter encontrado seja um <ENTER> passará de linha
       if (letra == '\n'){

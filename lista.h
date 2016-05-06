@@ -6,6 +6,10 @@ typedef struct Lista lista;
 
 lista *inciaLista();
 
+nodo *iniciaNodo();
+
+void preencheNodo(nodo *, char[], int);
+
 void inserirElemento(nodo n, lista l);
 //insere ordenadamente e checa se ele já existe,
 //caso exista adicona-se mais uma página/linha
