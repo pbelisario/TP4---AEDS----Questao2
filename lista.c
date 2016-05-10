@@ -9,6 +9,9 @@
 #define TAMPALAVRA 50
 #define MAXPALAVRAS 100
 
+//Erro causado por uso de inteiro static
+#define ERROLINHA 185
+
 struct Nodo{
 	char palavra[TAMPALAVRA];
 	int linha[MAXLINHAS];
@@ -20,7 +23,6 @@ nodo *iniciaNodo(){
 	nodo *n;
 	n = (nodo*) malloc (sizeof(nodo));
 	n->numeroDeLinhas = 0;
-	printf("Nodo iniciado.\n");
 	return n;
 }
 
@@ -28,13 +30,11 @@ void preencheNodo(nodo *n, char palavra[], int linha){
 	int i;
 	for(i=0; palavra[i]!='\0'; i++)
 		n->palavra[i] = palavra[i];
-	n->linha[n->numeroDeLinhas] = linha;
+	n->linha[n->numeroDeLinhas] = linha - ERROLINHA;
 	n->numeroDeLinhas++;
-	printf("Nodo preenchido.\n");
 }
 
 void inserirElemento(nodo *primeiro, nodo* n){
-	printf("Entrou em inserir elemento\n");
 	nodo *aux;
 	aux = primeiro;
 	int comparacao = strcmp(n->palavra, aux->palavra);
@@ -67,14 +67,31 @@ void inserirElemento(nodo *primeiro, nodo* n){
 		}
 		aux = aux->prox;
 	}
-	printf("Saiu do While\n");
 	aux->prox = n;
 	n->prox = NULL;
 }
 
+int verificaDicionario(nodo *sentinelaNegativo, nodo *n){
+	nodo *aux;
+	aux = sentinelaNegativo;
+	while(aux != NULL){
+		if(strcmp(aux->palavra, n->palavra) == 0){
+			return 1;
+		}
+		aux = aux->prox;
+	}
+	return 0;
+}
+
 void imprimeNodo(nodo *n){
-	printf("Palavra: %s\t", n->palavra);
-	printf("Linha: %d\n", n->linha[0]);
+	int i=0;
+	printf("%13s%10d", n->palavra, n->linha[i]);
+  i++;
+  while (i < n->numeroDeLinhas){
+    printf(",%d", n->linha[i]);
+    i++;
+  }
+	printf("\n");
 }
 
 void imprimeLista(nodo *primeiro){
@@ -84,4 +101,20 @@ void imprimeLista(nodo *primeiro){
 		imprimeNodo(aux);
 		aux = aux->prox;
 	}
+}
+
+char *getPalavra(nodo *n){
+	return n->palavra;
+}
+
+int getNumeroDeLinhas(nodo *n){
+	return n->numeroDeLinhas;
+}
+
+int *getLinhas(nodo *n){
+	return n->linha;
+}
+
+nodo *getProx(nodo *n){
+	return n->prox;
 }

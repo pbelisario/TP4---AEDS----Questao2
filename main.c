@@ -9,27 +9,45 @@ int main(int argc, char const *argv[]) {
   nodo *sentinela;
   sentinela = iniciaNodo();
 
+  //sentinela da lista que contera as palavras do dicionario negativo
+  nodo *sentinelaNegativo;
+  sentinelaNegativo = iniciaNodo();
 
-  nodo *teste;
-  teste = iniciaNodo();
+  nodo *aux;
+  aux = iniciaNodo();
 
   FILE *arqEntrada;
-  arqEntrada = AbrirArquivoEntrada();
+  arqEntrada = AbrirArquivoEntrada("arqEntrada.txt");
+  FILE *dicioNegativo;
+  dicioNegativo = AbrirArquivoEntrada("DicionarioNegativo.txt");
   FILE *arqSaida = GeraArquivoSaida();
 
-  char palavraTeste[50];
-  while(!feof(arqEntrada)){
-    teste = LerPalavra(arqEntrada,palavraTeste);
-    if(teste != NULL){
-      inserirElemento(sentinela, teste);
-      //TO DO verifica dicionario negativo
-      imprimeLista(sentinela);
+  //Preenhendo uma lista com as palavras do dicionario
+  char palavra[50];
+  while(!feof(dicioNegativo)){
+    aux = LerPalavra(dicioNegativo,palavra);
+    if(aux != NULL){
+      inserirElemento(sentinelaNegativo, aux);
     }
   }
-  //TO DO escreve no arquivo de saida
-  //imprimeLista(sentinela);
-  free(teste);
+
+  //Preenchendo outra lista com o indice remissivo
+  while(!feof(arqEntrada)){
+    aux = LerPalavra(arqEntrada,palavra);
+    if(aux != NULL && !(verificaDicionario(sentinelaNegativo, aux)) ){
+        inserirElemento(sentinela, aux);
+    }
+  }
+  imprimeLista(sentinela);
+  aux = sentinela;
+  while(aux != NULL){
+    EscreveNoArquivo(arqSaida, aux);
+    aux = (nodo *) getProx(aux);
+  }
+
+  free(aux);
   free(sentinela);
   fclose(arqEntrada);
   fclose(arqSaida);
+  fclose(dicioNegativo);
 }

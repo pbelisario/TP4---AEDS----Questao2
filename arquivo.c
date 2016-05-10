@@ -4,9 +4,8 @@
 #include "arquivo.h"
 #include "lista.h"
 
-
-FILE *AbrirArquivoEntrada (){
-  FILE *arqEntrada = fopen ("arqEntrada.txt", "r");
+FILE *AbrirArquivoEntrada (char *nome){
+  FILE *arqEntrada = fopen (nome, "r");
   if (arqEntrada == NULL){
     printf("Falha ao abrir o arquivo\n");
     //Termina o programa se não houver arquivo
@@ -26,16 +25,18 @@ FILE *GeraArquivoSaida (){
 
 
 //Recebe um nodo da lista imprime segundo esse padrao já escrito
-//void EscreveNoArquivo (FILE *arq,nodo *n){
-//  int i = 0;
-  //fprintf(arq, "%s\t%d", n->palavra, n->linha[i]);
-//  i++;
-//  while (i < n->tam){
-//    fprintf(arq, ",%d", n->linha[i]);
-//    i++;
-//  }
-//  fprintf(arq, "\n" );
-//}
+void EscreveNoArquivo (FILE *arq,nodo *n){
+  int i = 0;
+  int *linhas;
+  linhas = (int *)  getLinhas(n);
+  fprintf(arq, "%13s%10d", (char *)getPalavra(n), linhas[0]);
+  i++;
+  while (i < getNumeroDeLinhas(n)){
+    fprintf(arq, ",%d", linhas[i]);
+    i++;
+  }
+  fprintf(arq, "\n" );
+}
 
 
 nodo *LerPalavra(FILE *arq, char palavra[]){

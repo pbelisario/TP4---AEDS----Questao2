@@ -8,7 +8,7 @@
 
 //Abre o arquivo que contem o texto a ser lido
 //Também abrirá o dicionario negativo
-FILE *AbrirArquivoEntrada ();
+FILE *AbrirArquivoEntrada (char *);
 
 // Cria o arquivo em que estará o indice remissivo
 FILE *GeraArquivoSaida ();

@@ -1,0 +1,5 @@
+                      0
+         Aqui         1
+        estou         1
+           eu         1
+     testando         2,3,4,4
