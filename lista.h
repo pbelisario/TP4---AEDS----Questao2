@@ -6,6 +6,8 @@ typedef struct Nodo nodo;
 nodo *iniciaNodo();
 
 void preencheNodo(nodo *, char[], int);
+//dado uma palavra e uma linha, preenche o nodo com esses valores
+//caso a palavra ja esteja no indice, so altera o vetor de linhas
 
 void inserirElemento(nodo *, nodo *);
 //insere ordenadamente e checa se ele já existe,

@@ -9,7 +9,7 @@ int main(int argc, char const *argv[]) {
   nodo *sentinela;
   sentinela = iniciaNodo();
 
-  //sentinela da lista que contera as palavras do dicionario negativo
+  //sentinela da lista que conterá as palavras do dicionario negativo
   nodo *sentinelaNegativo;
   sentinelaNegativo = iniciaNodo();
 
@@ -17,6 +17,7 @@ int main(int argc, char const *argv[]) {
   aux = iniciaNodo();
 
   FILE *arqEntrada;
+  //o texto a ser lido é passado neste momento
   arqEntrada = AbrirArquivoEntrada("Texto2.txt");
   FILE *dicioNegativo;
   dicioNegativo = AbrirArquivoEntrada("DicionarioNegativo.txt");
@@ -32,6 +33,8 @@ int main(int argc, char const *argv[]) {
   }
 
   //Preenchendo outra lista com o indice remissivo
+  //utiliza a lista encadeada aqui
+  //verifica se a palavra existe no dicionario negativo
   while(!feof(arqEntrada)){
     aux = LerPalavra(arqEntrada,palavra);
     if(aux != NULL && !(verificaDicionario(sentinelaNegativo, aux)) ){
@@ -45,7 +48,7 @@ int main(int argc, char const *argv[]) {
     aux = (nodo *) getProx(aux);
   }
 
-
+  //liberação de memorias alocadas
   free(aux);
   deletaLista(sentinela);
   deletaLista(sentinelaNegativo );

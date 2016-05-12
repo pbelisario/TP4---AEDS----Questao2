@@ -34,7 +34,7 @@ void preencheNodo(nodo *n, char palavra[], int linha){
 	n->numeroDeLinhas++;
 }
 
-void inserirElemento(nodo *primeiro, nodo* n){
+void inserirElemento(nodo *primeiro, nodo *n){
 	nodo *aux;
 	aux = primeiro;
 	int comparacao = strcasecmp(n->palavra, aux->palavra);
@@ -51,7 +51,7 @@ void inserirElemento(nodo *primeiro, nodo* n){
 		free(n);
 		return;
 	}
-
+	//caso nao seja o primeiro, percorre a lista para encontrar posicao de inserção
 	while(aux->prox != NULL){
 		comparacao = strcasecmp(n->palavra, aux->prox->palavra);
 		if(comparacao < 0){
@@ -74,6 +74,7 @@ void inserirElemento(nodo *primeiro, nodo* n){
 int verificaDicionario(nodo *sentinelaNegativo, nodo *n){
 	nodo *aux;
 	aux = sentinelaNegativo;
+	//percorre lista verificando
 	while(aux != NULL){
 		if(strcmp(aux->palavra, n->palavra) == 0){
 			return 1;
@@ -84,6 +85,7 @@ int verificaDicionario(nodo *sentinelaNegativo, nodo *n){
 }
 
 void imprimeNodo(nodo *n){
+	//função de auxilio
 	int i=0;
 	printf("%13s%10d", n->palavra, n->linha[i]);
   i++;
@@ -95,6 +97,7 @@ void imprimeNodo(nodo *n){
 }
 
 void imprimeLista(nodo *primeiro){
+	//função de auxilio
 	nodo *aux;
 	aux = primeiro;
 	while(aux != NULL){
@@ -104,6 +107,7 @@ void imprimeLista(nodo *primeiro){
 }
 
 void deletaLista(nodo *primeiro){
+	//libera memoria
 	nodo *aux;
 	while(primeiro != NULL){
 		aux = primeiro;
@@ -112,6 +116,7 @@ void deletaLista(nodo *primeiro){
 	}
 }
 
+//funções necessárias devido à modularização do codigo
 char *getPalavra(nodo *n){
 	return n->palavra;
 }

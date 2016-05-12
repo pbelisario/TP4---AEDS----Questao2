@@ -28,10 +28,12 @@ FILE *GeraArquivoSaida (){
 void EscreveNoArquivo (FILE *arq,nodo *n){
   int i = 0;
   int *linhas;
+  //ponteiro necessario para acessar o vetor de linhas dos nodos
   linhas = (int *)  getLinhas(n);
   fprintf(arq, "%13s%10d", (char *)getPalavra(n), linhas[0]);
   i++;
   while (i < getNumeroDeLinhas(n)){
+	  //caso haja mais de uma linha, esse while garante que todas serao impressas
     fprintf(arq, ",%d", linhas[i]);
     i++;
   }
@@ -45,7 +47,7 @@ nodo *LerPalavra(FILE *arq, char palavra[]){
   static int linha = 1;
   // Diz se já se pode terminar a palavra
   int EFimDePalavra = 0;
-  // Indice do vetor palavra recebido como argumente
+  // Indice do vetor palavra recebido como argumento
   int index = 0;
   // Caracter a ser analizado para formar uma palavra
   int letra = fgetc (arq);
