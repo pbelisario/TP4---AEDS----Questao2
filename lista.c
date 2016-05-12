@@ -5,7 +5,7 @@
 #include "lista.h"
 #include "arquivo.h"
 
-#define MAXLINHAS 10
+#define MAXLINHAS 100
 #define TAMPALAVRA 50
 #define MAXPALAVRAS 100
 
@@ -37,7 +37,7 @@ void preencheNodo(nodo *n, char palavra[], int linha){
 void inserirElemento(nodo *primeiro, nodo* n){
 	nodo *aux;
 	aux = primeiro;
-	int comparacao = strcmp(n->palavra, aux->palavra);
+	int comparacao = strcasecmp(n->palavra, aux->palavra);
 	//se for o primeiro
 	if( comparacao < 0){
 		n->prox = aux;
@@ -53,7 +53,7 @@ void inserirElemento(nodo *primeiro, nodo* n){
 	}
 
 	while(aux->prox != NULL){
-		comparacao = strcmp(n->palavra, aux->prox->palavra);
+		comparacao = strcasecmp(n->palavra, aux->prox->palavra);
 		if(comparacao < 0){
 			n->prox = aux->prox;
 			aux->prox = n;
@@ -100,6 +100,15 @@ void imprimeLista(nodo *primeiro){
 	while(aux != NULL){
 		imprimeNodo(aux);
 		aux = aux->prox;
+	}
+}
+
+void deletaLista(nodo *primeiro){
+	nodo *aux;
+	while(primeiro != NULL){
+		aux = primeiro;
+		primeiro = primeiro->prox;
+		free(aux);
 	}
 }
 

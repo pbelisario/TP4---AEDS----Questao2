@@ -18,7 +18,7 @@ FILE *AbrirArquivoEntrada (char *nome){
 }
 
 FILE *GeraArquivoSaida (){
-  FILE *arqSaida = fopen ("SAIDA.txt", "w");
+  FILE *arqSaida = fopen ("SAIDA2.txt", "w");
   printf("Arquivo de saida aberto com sucesso.\n");
   return arqSaida;
 }

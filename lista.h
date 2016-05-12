@@ -15,4 +15,7 @@ int verificaDicionario(nodo *, nodo *);
 //percorre a lista que contém as palavras do dicionario negativo
 //retorna 1 se já existir a palavra no dicionario
 
+void deletaLista(nodo *);
+//percorre a lista liberando a memoria de cada nodo
+
 #endif

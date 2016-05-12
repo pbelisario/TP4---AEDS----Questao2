@@ -17,7 +17,7 @@ int main(int argc, char const *argv[]) {
   aux = iniciaNodo();
 
   FILE *arqEntrada;
-  arqEntrada = AbrirArquivoEntrada("arqEntrada.txt");
+  arqEntrada = AbrirArquivoEntrada("Texto2.txt");
   FILE *dicioNegativo;
   dicioNegativo = AbrirArquivoEntrada("DicionarioNegativo.txt");
   FILE *arqSaida = GeraArquivoSaida();
@@ -45,8 +45,10 @@ int main(int argc, char const *argv[]) {
     aux = (nodo *) getProx(aux);
   }
 
+
   free(aux);
-  free(sentinela);
+  deletaLista(sentinela);
+  deletaLista(sentinelaNegativo );
   fclose(arqEntrada);
   fclose(arqSaida);
   fclose(dicioNegativo);
